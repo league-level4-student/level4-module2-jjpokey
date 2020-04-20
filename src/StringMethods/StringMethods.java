@@ -124,24 +124,62 @@ return s1;
 	
 	// Return the number of times String substring appears in String s
 	public static int substringCount(String s, String substring) {
-		return 0;
+		int contains = 0;
+		int in = s.indexOf(substring, 0);
+		for(int i = 0; i < s.length(); i++) {
+			
+			in = s.indexOf(substring, i);
+			
+			if(in == -1) {
+				break;
+		}
+			else {
+				contains++;
+				i = (in + substring.length() - 1);
+			}
+			
+		}
+		
+		return contains;
 	}
 
 	// Call Utitilities.encrypt to encrypt String s
 	public static String encrypt(String s, char key) {
-		return null;
+		
+
+		byte[] b = new byte[s.length()];
+		b = s.getBytes();
+
+		String newS = Utilities.encrypt(b, (byte)key);
+		return newS;
 	}
 
 	// Call Utilities.decrypt to decrypt the cyphertext
 	public static String decrypt(String s, char key) {
-		return null;
+		
+		String newS = Utilities.decrypt(s, (byte)key);
+		return newS;
 	}
 
 
 	// Return the number of words in String s that end with String substring
 	// You can assume there are no punctuation marks between words
 	public static int wordsEndsWithSubstring(String s, String substring) {
-		return 0;
+		int contains = 0;
+		
+	String[] words = s.split(" ");
+		for(int j = 0; j < words.length; j++) {
+			if(words[j].indexOf(substring) == s.length() - substring.length()) {
+				contains++;
+		}
+		//HERE
+		
+		}
+		
+		
+		
+		
+		return contains;
 	}
 	
 
@@ -157,6 +195,10 @@ return s1;
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
 	public static boolean palindrome(String s) {
+		String storage = s;
+		for(int i = 0; i < s.length(); i++) {
+			storage = s;
+		}
 		return true;
 	}
 	
