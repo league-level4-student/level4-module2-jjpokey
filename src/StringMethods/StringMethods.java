@@ -169,13 +169,21 @@ return s1;
 		
 	String[] words = s.split(" ");
 		for(int j = 0; j < words.length; j++) {
-			if(words[j].indexOf(substring) == s.length() - substring.length()) {
+			System.out.println("Default : " + words[j].indexOf(substring) + " = " + (words[j].length() - substring.length()));
+			
+			if(words[j].length() - substring.length() >= 0) {
+			
+			if(words[j].substring(words[j].length() - substring.length()).equals(substring)) {
+				
+				
 				contains++;
-		}
-		//HERE
+				
+				System.out.println("Correct : " + words[j].indexOf(substring) + " = " + (words[j].length() - substring.length()));
+		
+			}
 		
 		}
-		
+		}
 		
 		
 		
@@ -187,7 +195,42 @@ return s1;
 	// of String substring and the final occurrence
 	// You can assume that substring will appear at least twice
 	public static int distance(String s, String substring) {
-		return 0;
+		
+		int characters = 0;
+		
+		String[] words = s.split(" ");
+		
+		String[] backwardsWords = s.split(" ");
+		
+		//reverse words
+		for(int a = 0; a < backwardsWords.length; a++) {
+			String storage = backwardsWords[a];
+			String storage2 = backwardsWords[backwardsWords.length - 1];
+			backwardsWords[a] = storage2;
+			backwardsWords[backwardsWords.length - (1 + a)] = storage;
+		}
+		
+		//first
+		for(int i = 0; i < words.length; i++) {
+			
+			if(words[i].indexOf(substring) >= 0) { //checks if current words at "i" contains substring
+			
+			int startingIndex = words[i].indexOf(substring);
+		}
+		//last
+			for(int j = 0; j < words.length; j++) {
+				
+				if(words[j].indexOf(substring) >= 0) { //checks if current words at "i" contains substring
+				
+				int endingIndex = words[j].indexOf(substring);
+			}
+			}
+		
+		
+		
+		
+		}
+		return characters;
 	}
 
 
