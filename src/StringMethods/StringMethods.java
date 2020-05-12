@@ -2,8 +2,10 @@ package StringMethods;
 
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 
 /*
 Visit the JavaDocs for the String class to view everything you can do with a String.  
@@ -196,41 +198,25 @@ return s1;
 	// You can assume that substring will appear at least twice
 	public static int distance(String s, String substring) {
 		
-		int characters = 0;
+		int index = -1;
+
+		ArrayList<Integer> ssFound = new ArrayList<Integer>();
 		
-		String[] words = s.split(" ");
-		
-		String[] backwardsWords = s.split(" ");
-		
-		//reverse words
-		for(int a = 0; a < backwardsWords.length; a++) {
-			String storage = backwardsWords[a];
-			String storage2 = backwardsWords[backwardsWords.length - 1];
-			backwardsWords[a] = storage2;
-			backwardsWords[backwardsWords.length - (1 + a)] = storage;
-		}
-		
-		//first
-		for(int i = 0; i < words.length; i++) {
-			
-			if(words[i].indexOf(substring) >= 0) { //checks if current words at "i" contains substring
-			
-			int startingIndex = words[i].indexOf(substring);
-		}
-		//last
-			for(int j = 0; j < words.length; j++) {
-				
-				if(words[j].indexOf(substring) >= 0) { //checks if current words at "i" contains substring
-				
-				int endingIndex = words[j].indexOf(substring);
+		while(index + 1 < s.length()) {
+
+				index = s.indexOf(substring, index + 1);
+ if(index >= 0) {
+	 ssFound.add(index);
+ }
+ else {
+	 break;
+ }
+
 			}
-			}
+		Collections.sort(ssFound);
 		
 		
-		
-		
-		}
-		return characters;
+		return ssFound.get(ssFound.size() - 1) - ssFound.get(0) - substring.length();
 	}
 
 
@@ -238,19 +224,54 @@ return s1;
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
 	public static boolean palindrome(String s) {
-		String storage = s;
-		for(int i = 0; i < s.length(); i++) {
-			storage = s;
+
+		String Original = s;
+		
+		Original = splitRecombind(Original," ");
+		Original = splitRecombind(Original,".");
+		Original = splitRecombind(Original,",");
+		Original = splitRecombind(Original,"\\?");
+		String Reversed = Original;
+
+		int correctCount = 0;
+		 
+for(int i = 0; i < Original.length(); i++) {
+	char rChar = Reversed.charAt(i);
+	
+}
+		
+		
+		
+		
+		if(correctCount == s.length()) {
+			return true;
 		}
-		return true;
+		else {
+			return false;
+		}
+		
+		
+		
+		
 	}
 	
+
+
+public static String splitRecombind(String s, String splitChar) {
+	
+	String combindString = "";
+	
+	String[] splitArray = s.split(splitChar);
+	for(int i = 0; i < splitArray.length; i++) {
+		combindString += splitArray[i];
+	}
+	return combindString;
 }
 
 class Utilities {
 	// This basic encryption scheme is called single-byte xor. It takes a single
 	// byte and uses exclusive-or on every character in the String.
-	public static String encrypt(byte[] plaintext, byte key) {
+	public String encrypt(byte[] plaintext, byte key) {
 		for (int i = 0; i < plaintext.length; i++) {
 			plaintext[i] = (byte) (plaintext[i] ^ key);
 		}
