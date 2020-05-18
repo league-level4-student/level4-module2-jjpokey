@@ -146,21 +146,21 @@ return s1;
 	}
 
 	// Call Utitilities.encrypt to encrypt String s
-	public static String encrypt(String s, char key) {
+	public static void encrypt(String s, char key) {
 		
 
 		byte[] b = new byte[s.length()];
 		b = s.getBytes();
 
-		String newS = Utilities.encrypt(b, (byte)key);
-		return newS;
+		//String newS = Utilities.encrypt(b, (byte)key);
+		//return newS;
 	}
 
 	// Call Utilities.decrypt to decrypt the cyphertext
 	public static String decrypt(String s, char key) {
 		
-		String newS = Utilities.decrypt(s, (byte)key);
-		return newS;
+		//String newS = Utilities.decrypt(s, (byte)key);
+		return null;
 	}
 
 
@@ -226,27 +226,40 @@ return s1;
 	public static boolean palindrome(String s) {
 
 		String Original = s;
-		
+		int j = 0;
 		Original = splitRecombind(Original," ");
-		Original = splitRecombind(Original,".");
+		Original = splitRecombind(Original,"\\.");
 		Original = splitRecombind(Original,",");
 		Original = splitRecombind(Original,"\\?");
-		String Reversed = Original;
+		Original = Original.toLowerCase();
+		String Reversed = " ";
+		char ReversedIndex = Reversed.charAt(j);
+		
+		for(j = 0; j < Original.length(); j++) {
+			ReversedIndex = Original.charAt(Original.length() - j - 1);
+			Reversed += ReversedIndex;
+		}
 
 		int correctCount = 0;
+		//test
+		 System.out.println("String Length: " + Original.length());
 		 
 for(int i = 0; i < Original.length(); i++) {
 	char rChar = Reversed.charAt(i);
-	
+	if(Original.charAt(i) == rChar) {
+		correctCount++;
+	}
 }
+//test
+		System.out.println("Correct Count: " + correctCount);
 		
 		
 		
-		
-		if(correctCount == s.length()) {
+		if(correctCount == Original.length()) {
 			return true;
 		}
 		else {
+			System.out.println(correctCount + " = " + Original.length() + " ? ");
 			return false;
 		}
 		
@@ -278,11 +291,12 @@ class Utilities {
 		return Base64.getEncoder().encodeToString(plaintext);
 	}
 
-	public static String decrypt(String cyphertext, byte key) {
+	public String decrypt(String cyphertext, byte key) {
 		byte[] b = Base64.getDecoder().decode(cyphertext);
 		for (int i = 0; i < b.length; i++) {
 			b[i] = (byte) (b[i] ^ key);
 		}
 		return new String(b);
 	}
+}
 }
